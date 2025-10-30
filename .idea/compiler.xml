@@ -10,17 +10,7 @@
         <module name="config-server" />
         <module name="service-registry" />
       </profile>
-      <profile name="Annotation profile for PaymentService" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-        </processorPath>
-        <module name="PaymentService" />
-      </profile>
-      <profile name="Annotation profile for CloudGateway" enabled="true">
+      <profile name="Annotation profile for ProductService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -29,9 +19,22 @@
         </processorPath>
         <module name="OrderService" />
         <module name="ProductService" />
+        <module name="PaymentService" />
         <module name="CloudGateway" />
       </profile>
+      <profile name="Annotation profile for securitybasic" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="securitybasic" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="security" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -40,6 +43,8 @@
       <module name="PaymentService" options="-parameters" />
       <module name="ProductService" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="security" options="-parameters" />
+      <module name="securitybasic" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>
   </component>
