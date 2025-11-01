@@ -13,10 +13,6 @@ spring:
       ddl-auto: update
   application:
     name: SECURITY-SERVICE
-  security:
-    user:
-      name: samit
-      password: samit@123
 
 
 
