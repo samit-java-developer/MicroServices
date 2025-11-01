@@ -1,6 +1,7 @@
 package com.samit.securitybasic.config;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(auth->auth.requestMatchers("/login/*","/logout/*").permitAll()
+        httpSecurity.authorizeHttpRequests(auth->auth.requestMatchers("/auth/signup","/login/*","/logout/*").permitAll()
                 .anyRequest().authenticated())
                 .csrf(csrfConfig-> csrfConfig.disable())
                 //.sessionManagement(sessionConfig ->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -51,5 +52,9 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
    }
 
+   @Bean
+   ModelMapper modelMapper(){
+        return new ModelMapper();
+   }
 
 }
