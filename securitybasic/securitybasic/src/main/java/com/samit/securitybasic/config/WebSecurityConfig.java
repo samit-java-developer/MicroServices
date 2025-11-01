@@ -34,7 +34,7 @@ public class WebSecurityConfig {
    }
 
    @Bean
-   UserDetailsService userDetailsService(){
+   UserDetailsService myInMemoryUserDetailsService(){
        UserDetails user =User.withUsername("deepak")
                .password(passwordEncoder().encode("deepak@123"))
                .roles("USER")
