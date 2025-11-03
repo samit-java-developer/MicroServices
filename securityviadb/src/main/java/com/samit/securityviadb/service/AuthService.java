@@ -1,10 +1,10 @@
-package com.samit.securitybasic.service;
+package com.samit.securityviadb.service;
 
-import com.samit.securitybasic.dto.LoginDto;
-import com.samit.securitybasic.dto.SignupDto;
-import com.samit.securitybasic.dto.UserDto;
-import com.samit.securitybasic.entity.UserEntity;
-import com.samit.securitybasic.repository.UserRepo;
+import com.samit.securityviadb.dto.LoginDto;
+import com.samit.securityviadb.dto.SignupDto;
+import com.samit.securityviadb.dto.UserDto;
+import com.samit.securityviadb.entity.UserEntity;
+import com.samit.securityviadb.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,9 +44,7 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword())
         );
-        User user = (User) authentication.getPrincipal(); //user-entity used from you custom entity class
-        UserEntity entity=modelMapper.map(user,UserEntity.class);
-        entity.setId(1L);
+        UserEntity entity = (UserEntity) authentication.getPrincipal(); //user-entity used from you custom entity class
         return jwtService.createToken(entity);
     }
 }

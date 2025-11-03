@@ -1,4 +1,4 @@
-package com.samit.securitybasic.entity;
+package com.samit.securityviadb.entity;
 
 
 import jakarta.persistence.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserEntity  {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +28,18 @@ public class UserEntity  {
 
     private String name;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public String getPassword(){
+        return this.password;
+    }
 }

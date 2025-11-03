@@ -1,10 +1,10 @@
-package com.samit.securitybasic.controller;
+package com.samit.securityviadb.controller;
 
 
-import com.samit.securitybasic.dto.LoginDto;
-import com.samit.securitybasic.dto.SignupDto;
-import com.samit.securitybasic.dto.UserDto;
-import com.samit.securitybasic.service.AuthService;
+import com.samit.securityviadb.dto.LoginDto;
+import com.samit.securityviadb.dto.SignupDto;
+import com.samit.securityviadb.dto.UserDto;
+import com.samit.securityviadb.service.AuthService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
