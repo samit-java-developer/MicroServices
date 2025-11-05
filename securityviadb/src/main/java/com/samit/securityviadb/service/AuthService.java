@@ -1,6 +1,7 @@
 package com.samit.securityviadb.service;
 
 import com.samit.securityviadb.dto.LoginDto;
+import com.samit.securityviadb.dto.LoginResponseDto;
 import com.samit.securityviadb.dto.SignupDto;
 import com.samit.securityviadb.dto.UserDto;
 import com.samit.securityviadb.entity.UserEntity;
@@ -26,7 +27,7 @@ public class AuthService {
     private final ModelMapper modelMapper;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-
+    private final UserServiceImpl userService;
 
     public UserDto signUp(SignupDto signupDto) {
         Optional<UserEntity> optionalUser =userRepo.findByEmail(signupDto.getEmail());
@@ -40,11 +41,21 @@ public class AuthService {
         return modelMapper.map(savedUser, UserDto.class);
     }
 
-    public String logIn(LoginDto loginDto) {
+    public LoginResponseDto logIn(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword())
         );
         UserEntity entity = (UserEntity) authentication.getPrincipal(); //user-entity used from you custom entity class
-        return jwtService.createToken(entity);
+        String accessToken=jwtService.createAccessToken(entity);
+        String refreshToken=jwtService.createRefreshToken(entity);
+
+        return new LoginResponseDto(entity.getId(), accessToken,refreshToken);
+    }
+
+    public LoginResponseDto refreshToken(String refreshToken){
+        Long userId=jwtService.generateUserIdFromToken(refreshToken);
+        UserEntity userEntity=userService.getUserById(userId);
+        String accessToken= jwtService.createAccessToken(userEntity);
+        return new LoginResponseDto(userEntity.getId(),accessToken,refreshToken);
     }
 }

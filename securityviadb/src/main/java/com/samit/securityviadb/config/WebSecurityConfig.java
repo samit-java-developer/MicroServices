@@ -31,12 +31,11 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(auth->auth.requestMatchers("/auth/logIn","/auth/signup","/logout/*").permitAll()
+        httpSecurity.authorizeHttpRequests(auth->auth.requestMatchers("/auth/logIn","/auth/signup","/auth/refreshToken").permitAll()
                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionConfig ->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return httpSecurity.build();
    }
    //going to make custom-user details to fetch the user data from database
